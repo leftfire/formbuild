@@ -1,8 +1,8 @@
-���ǻ�������ʲô��
-����ȫ������Ŀ������������������ http://www.leipi.org
+# 表单自定义
 
-������������أ�
-Demo����
-http://formdesign.leipi.org/downloads.html
-��չ����
-http://formdesign.leipi.org/downloads.html
+目标是实现的表单的自定义，可以在流程节点实现和表单的联动。
+
+:* 可以定义表单模板，保存的服务器
+:* 流程节点可以调用具体表单，并保存表单的内容
+:* 
+
