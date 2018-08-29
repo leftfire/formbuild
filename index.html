@@ -48,7 +48,11 @@
 
 <div class="container">
 <form method="post" id="saveform" name="saveform" action="/index.php?s=/index/parse.html">
+
+<!--预览也要用 用来解析表单-->
 <input type="hidden" name="fields" id="fields" value="0">
+<!--要提交到服务器的-->
+<input type="hidden" name="type" id="leipi_type" value="save">
 <div class="row">
 
     <div class="well well-small">
@@ -198,11 +202,11 @@ var leipiEditor = UE.getEditor('myFormDesign',{
             textarea: 'design_content',   
             //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
            toolbars:[[
-            'fullscreen', 'source', '|', 'undo', 'redo', '|','bold', 'italic', 'underline', 'fontborder', 'strikethrough',  'removeformat', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist','|', 'fontfamily', 'fontsize', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',  'link', 'unlink',  '|',  'horizontal',  'spechars',  'wordimage', '|', 'inserttable', 'deletetable',  'mergecells',  'splittocells']],
+            'fullscreen', 'source', '|', 'undo', 'redo', '|','bold', 'italic', 'underline', 'fontborder', 'strikethrough',  'removeformat', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist','|', 'fontfamily', 'fontsize', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',  'link', 'unlink',  '|',  'horizontal',  'spechars',  'wordimage', '|', 'inserttable', 'deletetable',  'mergecells',  'splittocells','|', 'preview']],
             //focus时自动清空初始化时的内容
             //autoClearinitialContent:true,
             //关闭字数统计
-            wordCount:false,
+            wordCount:true,
             //关闭elementPath
             elementPathEnabled:false,
             //默认的编辑区域高度
@@ -403,8 +407,8 @@ var leipiEditor = UE.getEditor('myFormDesign',{
         if(leipiEditor.hasContents()){
             leipiEditor.sync();/*同步内容*/
             
-            alert("你点击了保存,这里可以异步提交，请自行处理....");
-            return false;
+           // alert("你点击了保存,这里可以异步提交，请自行处理....");
+            //return false;
             //--------------以下仅参考-----------------------------------------------------------------------------------------------------
             var type_value='',formid=0,fields=$("#fields").val(),formeditor='';
 
@@ -457,16 +461,21 @@ var leipiEditor = UE.getEditor('myFormDesign',{
         if(leipiEditor.hasContents()){
             leipiEditor.sync();       /*同步内容*/
             
-             alert("你点击了预览,请自行处理....");
-            return false;
+            // alert("你点击了预览,请自行处理....");
+            // return false;
             //--------------以下仅参考-------------------------------------------------------------------
 
 
             /*设计form的target 然后提交至一个新的窗口进行预览*/
             document.saveform.target="mywin";
             window.open('','mywin',"menubar=0,toolbar=0,status=0,resizable=1,left=0,top=0,scrollbars=1,width=" +(screen.availWidth-10) + ",height=" + (screen.availHeight-50) + "\"");
+            //window.open("./preview.html");
 
-            document.saveform.action="/index.php?s=/index/preview.html";
+            /*更改saveform表单的action地址*/
+            // document.saveform.action="/index.php?s=/index/preview.html";
+            document.saveform.action="./preview.html";
+
+            
             document.saveform.submit(); //提交表单
         } else {
             alert('表单内容不能为空！');
@@ -491,12 +500,6 @@ var leipiEditor = UE.getEditor('myFormDesign',{
 88           88  88           `"Ybbd8"'    88     88      Y88'     `"Y8888P'     "Y88888P"   
                                                           d8'                                
 2014-3-15 Firefly95、Ard、xinG、Xiaoyaodaya               d8'  
-</div>
-<div style="width:1px;height:1px">
-  <script type="text/javascript">
-  var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-  document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F1e6fd3a46a5046661159c6bf55aad1cf' type='text/javascript'%3E%3C/script%3E"));
-  </script>
 </div>
 </body>
 </html>
